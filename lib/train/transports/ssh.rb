@@ -64,6 +64,7 @@ module Train::Transports
     option :bastion_port, default: 22
     option :non_interactive, default: false
     option :verify_host_key, default: false
+    option :auth_methods, default: ["none"]
 
     option :compression_level do |opts|
       # on nil or false: set compression level to 0
@@ -89,7 +90,6 @@ module Train::Transports
       super(options)
 
       key_files = Array(options[:key_files])
-      options[:auth_methods] ||= ["none"]
 
       unless key_files.empty?
         options[:auth_methods].push("publickey")
